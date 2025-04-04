@@ -1,4 +1,4 @@
-import AbstractView from './abstract-view.js';
+import AbstractView from '../framework/view/abstract-view.js';
 import { formatDateToCustomFormat } from '../utils.js';
 import { offersByType, destinations } from '../mock/task.js';
 
@@ -27,6 +27,7 @@ const createEventFormTemplate = (routePoint) => {
   `).join('');
 
   return `
+      <li class="trip-events__item">
     <form class="event event--edit" action="#" method="post">
       <header class="event__header">
         <div class="event__type-wrapper">
@@ -116,8 +117,11 @@ const createEventFormTemplate = (routePoint) => {
           <input class="event__input event__input--price" id="event-price-1" type="text" name="event-price" value="${routePoint.price || ''}" placeholder="price">
         </div>
 
-        <button class="event__save-btn btn btn--blue" type="submit">Save</button>
-        <button class="event__reset-btn" type="reset">Cancel</button>
+        <button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
+          <button class="event__reset-btn" type="reset">Delete</button>
+          <button class="event__rollup-btn" type="button">
+            <span class="visually-hidden">Open event</span>
+          </button>
       </header>
       <section class="event__details">
         <section class="event__section event__section--offers">
@@ -139,16 +143,40 @@ const createEventFormTemplate = (routePoint) => {
         </section>
       </section>
     </form>
+    </li>
   `;
 };
 
 export default class CreateEditEventView extends AbstractView {
-  constructor(routePoint) {
+  #onCloseEditButtonClick = null;
+  #onSubmitButtonClick = null;
+
+  constructor(routePoint, onCloseEditButtonClick, onSubmitButtonClick) {
     super();
     this.routePoint = routePoint;
+    this.#onCloseEditButtonClick = onCloseEditButtonClick;
+    this.#onSubmitButtonClick = onSubmitButtonClick;
+
+    this.#setEventListeners();
   }
 
-  getTemplate() {
+  get template() {
     return createEventFormTemplate(this.routePoint);
   }
+
+  #setEventListeners() {
+    this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#closeEditButtonClickHandler);
+
+    this.element.querySelector('.event__save-btn').addEventListener('submit', this.#submitButtonClickHandler);
+  }
+
+  #closeEditButtonClickHandler = (evt) => {
+    evt.preventDefault();
+    this.#onCloseEditButtonClick();
+  };
+
+  #submitButtonClickHandler = (evt) => {
+    evt.preventDefault();
+    this.#onSubmitButtonClick();
+  };
 }
