@@ -1,6 +1,6 @@
 import AbstractView from '../framework/view/abstract-view.js';
 import { formatDateToCustomFormat } from '../utils.js';
-import { offersByType, destinations } from '../mock/task.js';
+import { offersByType, destinations } from '../mock/mock-route-data.js';
 
 const createEventFormTemplate = (routePoint) => {
   const { dateFrom, dateTo, type, city, availableOfferIds, selectedOfferIds, destinationId } = routePoint;
