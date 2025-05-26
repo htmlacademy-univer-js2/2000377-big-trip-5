@@ -17,6 +17,8 @@ const formatDatetime = (date, withTime = false) => {
   return `${datePart}T${timePart}`;
 };
 
+const updatePoint = (points, updatedPoint) => points.map((point) => point.id === updatedPoint.id ? updatedPoint : point);
+
 const calculateDuration = (dateFrom, dateTo) => {
   const duration = (dateTo - dateFrom) / 60000;
 
@@ -62,5 +64,6 @@ export {
   isEscapeKey,
   isFuturePoint,
   isPresentPoint,
-  isPastPoint
+  isPastPoint,
+  updatePoint
 };
