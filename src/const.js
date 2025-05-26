@@ -1,3 +1,9 @@
+const AUTHORIZATION = 'Basic asdbutt67das';
+
+const END_POINT = 'https://24.objects.htmlacademy.pro/big-trip';
+
+const SHAKE_DELAY = 600;
+
 const FilterType = {
   EVERYTHING: 'EVERYTHING',
   FUTURE: 'FUTURE',
@@ -21,7 +27,9 @@ const Mode = {
 const UpdateType = {
   PATCH: 'PATCH',
   MINOR: 'MINOR',
-  MAJOR: 'MAJOR'
+  MAJOR: 'MAJOR',
+  INIT: 'INIT',
+  ERROR: 'ERROR'
 };
 
 const UserAction = {
@@ -52,4 +60,11 @@ const EmptyPoint = {
   'type': 'flight'
 };
 
-export { FilterType, SortType, Mode, UpdateType, UserAction, EmptyListMessage, FormType, EmptyPoint };
+const Method = {
+  GET: 'GET',
+  POST: 'POST',
+  PUT: 'PUT',
+  DELETE: 'DELETE',
+};
+
+export { AUTHORIZATION, END_POINT, SHAKE_DELAY, FilterType, SortType, Mode, UpdateType, UserAction, EmptyListMessage, FormType, EmptyPoint, Method };
