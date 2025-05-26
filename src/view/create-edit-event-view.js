@@ -4,7 +4,7 @@ import { FormType, UpdateType, UserAction } from '../const.js';
 import flatpickr from 'flatpickr';
 import '../../node_modules/flatpickr/dist/flatpickr.css';
 
-const createEventFormTemplate = (routePoint, destinations, offersByType, formType) => {
+const createEditEventTemplate = (routePoint, destinations, offersByType, formType) => {
   const { base_price: basePrice, date_from: dateFrom, date_to: dateTo, destination, offers, type } = routePoint;
 
   const startTime = dateFrom ? formatDateToCustomFormat(dateFrom) : '';
@@ -179,7 +179,7 @@ export default class CreateEditEventView extends AbstractStatefulView {
   }
 
   get template() {
-    return createEventFormTemplate(this._state, this.#destinations, this.#offersByType, this.#formType);
+    return createEditEventTemplate(this._state, this.#destinations, this.#offersByType, this.#formType);
   }
 
   _restoreHandlers() {

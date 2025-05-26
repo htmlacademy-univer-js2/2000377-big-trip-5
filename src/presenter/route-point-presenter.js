@@ -1,5 +1,5 @@
 import { render, replace } from '../framework/render.js';
-import RoutePointView from '../view/trip-event-view.js';
+import RoutePointView from '../view/route-point-view.js';
 import CreateEditEventView from '../view/create-edit-event-view.js';
 import { isEscapeKey } from '../utils.js';
 import { Mode, UserAction, UpdateType, FormType } from '../const.js';
