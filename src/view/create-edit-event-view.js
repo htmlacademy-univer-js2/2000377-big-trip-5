@@ -4,8 +4,8 @@ import { SHAKE_DELAY, FormType, UpdateType, UserAction } from '../const.js';
 import flatpickr from 'flatpickr';
 import '../../node_modules/flatpickr/dist/flatpickr.css';
 
-const createEventFormTemplate = (routePoint, destinations, offersByType, formType) => {
-  const { base_price: basePrice, date_from: dateFrom, date_to: dateTo, destination, offers, type } = routePoint;
+const createEventFormTemplate = (tripEvent, destinations, offersByType, formType) => {
+  const { base_price: basePrice, date_from: dateFrom, date_to: dateTo, destination, offers, type } = tripEvent;
 
   const startTime = dateFrom ? formatDateToCustomFormat(dateFrom) : '';
   const endTime = dateTo ? formatDateToCustomFormat(dateTo) : '';
@@ -166,9 +166,9 @@ export default class CreateEditEventView extends AbstractStatefulView {
   #destinations = null;
   #offersByType = null;
 
-  constructor(routePoint, destinations, offers, onCloseEditButtonClick, onDataChange, onEscKeyDownListener, formType) {
+  constructor(tripEvent, destinations, offers, onCloseEditButtonClick, onDataChange, onEscKeyDownListener, formType) {
     super();
-    this._state = { ...routePoint };
+    this._state = { ...tripEvent };
     this.#onCloseEditButtonClick = onCloseEditButtonClick;
     this.#onDataChange = onDataChange;
     this.#onEscKeyDownListener = onEscKeyDownListener;

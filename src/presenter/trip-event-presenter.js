@@ -6,7 +6,7 @@ import { Mode, UserAction, UpdateType, FormType } from '../const.js';
 
 export default class RoutePointPresenter {
   #eventsListContainer = null;
-  #routePoint = null;
+  #tripEvent = null;
   #point = null;
   #editPoint = null;
   #onDataChange = null;
@@ -27,8 +27,8 @@ export default class RoutePointPresenter {
     this.#offers = offers;
   }
 
-  init(routePoint) {
-    this.#routePoint = routePoint;
+  init(tripEvent) {
+    this.#tripEvent = tripEvent;
     this.#renderRoutePoint();
   }
 
@@ -47,7 +47,7 @@ export default class RoutePointPresenter {
     this.destroy();
 
     this.#point = new RoutePointView(
-      this.#routePoint,
+      this.#tripEvent,
       this.#destinations,
       this.#offers,
       this.#onOpenEditButtonClick,
@@ -57,10 +57,10 @@ export default class RoutePointPresenter {
     render(this.#point, this.#eventsListContainer);
   }
 
-  #onFavoriteClick = async (routePoint) => {
+  #onFavoriteClick = async (tripEvent) => {
     // eslint-disable-next-line camelcase
-    routePoint.is_favorite = !routePoint.is_favorite;
-    await this.#onDataChange(UserAction.UPDATE_POINT, UpdateType.PATCH, routePoint);
+    tripEvent.is_favorite = !tripEvent.is_favorite;
+    await this.#onDataChange(UserAction.UPDATE_POINT, UpdateType.PATCH, tripEvent);
   };
 
   #onEscKeyDown = (evt) => {
@@ -94,7 +94,7 @@ export default class RoutePointPresenter {
     }
 
     this.#editPoint = new CreateEditEventView(
-      this.#routePoint,
+      this.#tripEvent,
       this.#destinations,
       this.#offers,
       this.#onCloseEditButtonClick,

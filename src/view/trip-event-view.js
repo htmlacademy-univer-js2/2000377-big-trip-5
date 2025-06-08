@@ -2,8 +2,8 @@ import AbstractView from '../framework/view/abstract-view.js';
 import { formatDate, formatTime, formatDatetime, calculateDuration } from '../utils.js';
 import { SHAKE_DELAY } from '../const.js';
 
-const createRoutePointTemplate = (routePoint, destinations, offersByType) => {
-  const { base_price: basePrice, date_from: dateFrom, date_to: dateTo, destination, is_favorite: isFavorite, offers, type } = routePoint;
+const createRoutePointTemplate = (tripEvent, destinations, offersByType) => {
+  const { base_price: basePrice, date_from: dateFrom, date_to: dateTo, destination, is_favorite: isFavorite, offers, type } = tripEvent;
 
   const formattedDate = formatDate(dateFrom);
   const startTime = formatTime(dateFrom);
@@ -69,13 +69,13 @@ const createRoutePointTemplate = (routePoint, destinations, offersByType) => {
 export default class RoutePointView extends AbstractView {
   #onOpenEditButtonClick = null;
   #onFavoriteClick = null;
-  #routePoint = null;
+  #tripEvent = null;
   #destinations = null;
   #offersByType = null;
 
-  constructor(routePoint, destinations, offers, onOpenEditButtonClick, onFavoriteClick) {
+  constructor(tripEvent, destinations, offers, onOpenEditButtonClick, onFavoriteClick) {
     super();
-    this.#routePoint = routePoint;
+    this.#tripEvent = tripEvent;
     this.#destinations = destinations;
     this.#offersByType = offers;
 
@@ -86,7 +86,7 @@ export default class RoutePointView extends AbstractView {
   }
 
   get template() {
-    return createRoutePointTemplate(this.#routePoint, this.#destinations, this.#offersByType);
+    return createRoutePointTemplate(this.#tripEvent, this.#destinations, this.#offersByType);
   }
 
   #setEventListeners() {
@@ -109,7 +109,7 @@ export default class RoutePointView extends AbstractView {
   #favoriteButtonClickHandler = async (evt) => {
     evt.preventDefault();
     try {
-      await this.#onFavoriteClick(this.#routePoint);
+      await this.#onFavoriteClick(this.#tripEvent);
     } catch (error) {
       this.#setAborting();
     }

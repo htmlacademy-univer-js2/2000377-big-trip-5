@@ -55,8 +55,8 @@ const isPresentPoint = (point) => dayjs().isAfter(point.date_from, 'minute') && 
 
 const isPastPoint = (point) => dayjs().isAfter(point.date_to, 'minute');
 
-const sortRoutePoints = (points, sortType) => {
-  const sortedPoints = [...points];
+const sortTripEvents = (events, sortType) => {
+  const sortedPoints = [...events];
 
   switch (sortType) {
     case SortType.DAY:
@@ -128,6 +128,6 @@ export {
   isFuturePoint,
   isPresentPoint,
   isPastPoint,
-  sortRoutePoints,
+  sortTripEvents,
   getTripInfo
 };

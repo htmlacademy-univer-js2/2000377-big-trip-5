@@ -1,7 +1,7 @@
 import Observable from '../framework/observable.js';
 import { UpdateType } from '../const.js';
 
-export default class RoutePointsModel extends Observable {
+export default class TripEventsModel extends Observable {
   #points = [];
   #allOffers = [];
   #allDestinations = [];
