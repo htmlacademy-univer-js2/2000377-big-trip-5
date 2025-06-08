@@ -1,4 +1,4 @@
-const AUTHORIZATION = 'Basic asdbutt67das';
+const AUTHORIZATION = 'Basic asdkeks67das';
 
 const END_POINT = 'https://24.objects.htmlacademy.pro/big-trip';
 
