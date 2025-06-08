@@ -6,24 +6,20 @@ import { generateFilters } from '../filter-sort-data/filter-data.js';
 export default class FilterPresenter {
   #filterContainer = null;
   #filterModel = null;
-  #routePointsModel = null;
+  #tripEventsModel = null;
   #filterComponent = null;
 
-  constructor(filterContainer, filterModel, routePointsModel) {
+  constructor(filterContainer, filterModel, tripEventsModel) {
     this.#filterContainer = filterContainer;
     this.#filterModel = filterModel;
-    this.#routePointsModel = routePointsModel;
+    this.#tripEventsModel = tripEventsModel;
 
-    this.#routePointsModel.addObserver(this.#handleModelEvent);
+    this.#tripEventsModel.addObserver(this.#handleModelEvent);
     this.#filterModel.addObserver(this.#handleModelEvent);
   }
 
   init() {
-    if (!this.#routePointsModel.points || !this.#routePointsModel.points.length) {
-      return;
-    }
-
-    const filters = generateFilters(this.#routePointsModel.points);
+    const filters = generateFilters(this.#tripEventsModel.points);
     const currentFilterType = this.#filterModel.filter;
     const prevComponent = this.#filterComponent;
 
